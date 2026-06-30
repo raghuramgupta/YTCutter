@@ -512,7 +512,7 @@ export default function Home() {
 
                             <p className="mt-4 text-xs text-gray-500">
                               Instagram does not support direct web link sharing like the others.
-                              For Instagram, use <span className="font-semibold">Copy Link</span> or the device’s native <span className="font-semibold">Share</span> option.
+                              For Instagram, use <span className="font-semibold">Copy Link</span> or the device's native <span className="font-semibold">Share</span> option.
                             </p>
                           </div>
                         </>
