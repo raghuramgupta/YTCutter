@@ -14,7 +14,7 @@ const extractVideoId = (url: string): string | null => {
     const host = parsed.hostname.replace("www.", "");
 
     if (host === "youtu.be") {
-      return parsed.pathname.slice(1).split("/") || null;
+      return parsed.pathname.slice(1).split("/")[0] || null;
     }
 
     if (
@@ -26,13 +26,13 @@ const extractVideoId = (url: string): string | null => {
         return parsed.searchParams.get("v");
       }
       if (parsed.pathname.startsWith("/embed/")) {
-        return parsed.pathname.split("/embed/")?.split("/") || null;
+        return parsed.pathname.split("/embed/")[1]?.split("/")[0] || null;
       }
       if (parsed.pathname.startsWith("/shorts/")) {
-        return parsed.pathname.split("/shorts/")?.split("/") || null;
+        return parsed.pathname.split("/shorts/")[1]?.split("/")[0] || null;
       }
       if (parsed.pathname.startsWith("/live/")) {
-        return parsed.pathname.split("/live/")?.split("/") || null;
+        return parsed.pathname.split("/live/")[1]?.split("/")[0] || null;
       }
     }
 
@@ -41,7 +41,6 @@ const extractVideoId = (url: string): string | null => {
     return null;
   }
 };
-
 
 const formatTime = (seconds: number): string => {
   const total = Math.max(0, Math.floor(Number(seconds) || 0));
