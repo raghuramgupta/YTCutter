@@ -69,9 +69,9 @@ const parseTime = (timeStr: string): number => {
 
   if (parts.some((n) => Number.isNaN(n))) return NaN;
 
-  if (parts.length === 1) return parts;
-  if (parts.length === 2) return parts * 60 + parts;
-  if (parts.length === 3) return parts * 3600 + parts * 60 + parts;
+  if (parts.length === 1) return parts[0];
+  if (parts.length === 2) return parts[0] * 60 + parts[1];
+  if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
 
   return NaN;
 };
