@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Youtube clip sharing is made easy...",
-  description: "Youtube clip sharing is made easy...",",
+  description: "Youtube clip sharing is made easy...",
 };
 
 export default function RootLayout({
