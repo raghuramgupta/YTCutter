@@ -228,7 +228,7 @@ export default function Home() {
       if (navigator.share) {
         await navigator.share({
           title: "YouTube Clip",
-          text: `Watch this clip from \${startTime} to \${endTime}`,
+          text: `Watch this clip from ${startTime} to ${endTime}`,
           url: generatedLink,
         });
       } else {
@@ -246,85 +246,85 @@ export default function Home() {
   const shareToX = () => {
     if (!generatedLink) return;
     const text = encodeURIComponent(
-      `Watch this YouTube clip from \${startTime} to \${endTime}`
+      `Watch this YouTube clip from ${startTime} to ${endTime}`
     );
     const url = encodeURIComponent(generatedLink);
-    openShareWindow(`[https://twitter.com/intent/tweet?text=](https://twitter.com/intent/tweet?text=)\${text}&url=\${url}`);
+    openShareWindow(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
   };
 
   const shareToFacebook = () => {
     if (!generatedLink) return;
     const url = encodeURIComponent(generatedLink);
-    openShareWindow(`[https://www.facebook.com/sharer/sharer.php?u=](https://www.facebook.com/sharer/sharer.php?u=)\${url}`);
+    openShareWindow(`https://www.facebook.com/sharer/sharer.php?u=${url}`);
   };
 
   const shareToWhatsApp = () => {
     if (!generatedLink) return;
     const text = encodeURIComponent(
-      `Watch this YouTube clip from \${startTime} to \${endTime}: \${generatedLink}`
+      `Watch this YouTube clip from ${startTime} to ${endTime}: ${generatedLink}`
     );
-    openShareWindow(`[https://wa.me/?text=](https://wa.me/?text=)\${text}`);
+    openShareWindow(`https://wa.me/?text=${text}`);
   };
 
   const shareToTelegram = () => {
     if (!generatedLink) return;
     const text = encodeURIComponent(
-      `Watch this YouTube clip from \${startTime} to \${endTime}`
+      `Watch this YouTube clip from ${startTime} to ${endTime}`
     );
     const url = encodeURIComponent(generatedLink);
-    openShareWindow(`[https://t.me/share/url?url=](https://t.me/share/url?url=)\${url}&text=\${text}`);
+    openShareWindow(`https://t.me/share/url?url=${url}&text=${text}`);
   };
 
   const shareToLinkedIn = () => {
     if (!generatedLink) return;
     const url = encodeURIComponent(generatedLink);
-    openShareWindow(`[https://www.linkedin.com/sharing/share-offsite/?url=](https://www.linkedin.com/sharing/share-offsite/?url=)\${url}`);
+    openShareWindow(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`);
   };
 
   const shareByEmail = () => {
     if (!generatedLink) return;
     const subject = encodeURIComponent("Check out this YouTube clip");
     const body = encodeURIComponent(
-      `Watch this YouTube clip from \${startTime} to \${endTime}:\n\n\${generatedLink}`
+      `Watch this YouTube clip from ${startTime} to ${endTime}:\n\n${generatedLink}`
     );
-    window.location.href = `mailto:?subject=\${subject}&body=\${body}`;
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
   };
 
   const viewerStartSeconds = parseTime(startTime);
   const safeStart = Number.isNaN(viewerStartSeconds) ? 0 : viewerStartSeconds;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 px-3 py-6 sm:px-4 sm:py-8">
       <div className="mx-auto max-w-5xl">
-        <div className="mb-8 text-center">
-          <div className="inline-flex items-center rounded-full bg-white/80 px-4 py-2 text-sm font-semibold text-indigo-700 shadow-sm ring-1 ring-indigo-100">
+        <div className="mb-6 text-center sm:mb-8">
+          <div className="inline-flex items-center rounded-full bg-white/80 px-3 py-1.5 text-xs font-semibold text-indigo-700 shadow-sm ring-1 ring-indigo-100 sm:px-4 sm:py-2 sm:text-sm">
             ✂️ Smart YouTube Clip Sharing
           </div>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl">
+          <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-gray-900 sm:mt-4 sm:text-4xl md:text-5xl">
             YouTube Clip Maker
           </h1>
-          <p className="mt-3 text-lg text-gray-600">
+          <p className="mt-2 text-base text-gray-600 sm:mt-3 sm:text-lg">
             Load a video, choose the start and end time, and instantly share the clip.
           </p>
         </div>
 
-        <div className="overflow-hidden rounded-3xl border border-white/60 bg-white/90 shadow-2xl backdrop-blur">
+        <div className="overflow-hidden rounded-2xl border border-white/60 bg-white/90 shadow-2xl backdrop-blur sm:rounded-3xl">
           {!isViewingSharedClip && (
-            <div className="border-b border-gray-100 bg-gradient-to-r from-indigo-50 via-white to-blue-50 p-6 md:p-8">
-              <label className="mb-3 block text-sm font-semibold text-gray-700">
+            <div className="border-b border-gray-100 bg-gradient-to-r from-indigo-50 via-white to-blue-50 p-4 sm:p-6 md:p-8">
+              <label className="mb-2 block text-sm font-semibold text-gray-700 sm:mb-3">
                 Paste YouTube URL
               </label>
-              <div className="flex flex-col gap-3 md:flex-row">
+              <div className="flex flex-col gap-3 sm:flex-row">
                 <input
                   type="text"
                   value={inputUrl}
                   onChange={(e) => setInputUrl(e.target.value)}
                   placeholder="https://www.youtube.com/watch?v=..."
-                  className="flex-1 rounded-2xl border border-gray-300 bg-white px-4 py-4 text-black shadow-sm outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
+                  className="min-w-0 flex-1 rounded-xl border border-gray-300 bg-white px-4 py-3 text-base text-black shadow-sm outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 sm:rounded-2xl sm:py-4"
                 />
                 <button
                   onClick={handleLoadVideo}
-                  className="rounded-2xl bg-gradient-to-r from-red-600 to-pink-600 px-6 py-4 font-semibold text-white shadow-lg transition hover:scale-[1.02] hover:shadow-xl"
+                  className="rounded-xl bg-gradient-to-r from-red-600 to-pink-600 px-6 py-3 font-semibold text-white shadow-lg transition hover:scale-[1.02] hover:shadow-xl active:scale-[0.99] sm:rounded-2xl sm:py-4"
                 >
                   Load Video
                 </button>
@@ -332,7 +332,7 @@ export default function Home() {
             </div>
           )}
 
-          <div className="p-6 md:p-8">
+          <div className="p-4 sm:p-6 md:p-8">
             {error && (
               <div className="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-red-700 shadow-sm">
                 {error}
@@ -341,28 +341,32 @@ export default function Home() {
 
             {videoId && (
               <>
-                <div className="mb-8 overflow-hidden rounded-2xl border border-gray-200 bg-black shadow-xl">
-                  <YouTube
-                    videoId={videoId}
-                    opts={{
-                      width: "100%",
-                      height: "500",
-                      playerVars: {
-                        autoplay: isViewingSharedClip ? 1 : 0,
-                        start: safeStart,
-                      },
-                    }}
-                    onReady={(event) => {
-                      playerRef.current = event.target;
-                      setPlayerReady(true);
-                    }}
-                  />
+                <div className="mb-6 overflow-hidden rounded-xl border border-gray-200 bg-black shadow-xl sm:mb-8 sm:rounded-2xl">
+                  <div className="relative aspect-video w-full">
+                    <YouTube
+                      videoId={videoId}
+                      opts={{
+                        width: "100%",
+                        height: "100%",
+                        playerVars: {
+                          autoplay: isViewingSharedClip ? 1 : 0,
+                          start: safeStart,
+                        },
+                      }}
+                      className="absolute inset-0 h-full w-full"
+                      iframeClassName="h-full w-full"
+                      onReady={(event) => {
+                        playerRef.current = event.target;
+                        setPlayerReady(true);
+                      }}
+                    />
+                  </div>
                 </div>
 
                 {!isViewingSharedClip ? (
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                      <div className="rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50 to-white p-5 shadow-sm">
+                  <div className="space-y-5 sm:space-y-6">
+                    <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
+                      <div className="rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50 to-white p-4 shadow-sm sm:p-5">
                         <label className="mb-2 block text-sm font-bold text-emerald-800">
                           Start Time
                         </label>
@@ -371,17 +375,17 @@ export default function Home() {
                           value={startTime}
                           onChange={(e) => setStartTime(e.target.value)}
                           placeholder="MM:SS or HH:MM:SS"
-                          className="mb-3 w-full rounded-xl border border-emerald-200 bg-white p-3 text-black outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
+                          className="mb-3 w-full rounded-xl border border-emerald-200 bg-white p-3 text-base text-black outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
                         />
                         <button
                           onClick={() => captureTime("start")}
-                          className="w-full rounded-xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white shadow transition hover:bg-emerald-700"
+                          className="w-full rounded-xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white shadow transition hover:bg-emerald-700 active:scale-[0.99]"
                         >
                           Set Current Time as Start
                         </button>
                       </div>
 
-                      <div className="rounded-2xl border border-rose-100 bg-gradient-to-br from-rose-50 to-white p-5 shadow-sm">
+                      <div className="rounded-2xl border border-rose-100 bg-gradient-to-br from-rose-50 to-white p-4 shadow-sm sm:p-5">
                         <label className="mb-2 block text-sm font-bold text-rose-800">
                           End Time
                         </label>
@@ -390,24 +394,24 @@ export default function Home() {
                           value={endTime}
                           onChange={(e) => setEndTime(e.target.value)}
                           placeholder="MM:SS or HH:MM:SS"
-                          className="mb-3 w-full rounded-xl border border-rose-200 bg-white p-3 text-black outline-none focus:border-rose-500 focus:ring-4 focus:ring-rose-100"
+                          className="mb-3 w-full rounded-xl border border-rose-200 bg-white p-3 text-base text-black outline-none focus:border-rose-500 focus:ring-4 focus:ring-rose-100"
                         />
                         <button
                           onClick={() => captureTime("end")}
-                          className="w-full rounded-xl bg-rose-600 px-4 py-3 text-sm font-semibold text-white shadow transition hover:bg-rose-700"
+                          className="w-full rounded-xl bg-rose-600 px-4 py-3 text-sm font-semibold text-white shadow transition hover:bg-rose-700 active:scale-[0.99]"
                         >
                           Set Current Time as End
                         </button>
                       </div>
                     </div>
 
-                    <div className="rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-5 shadow-sm">
+                    <div className="rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 shadow-sm sm:p-5">
                       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                         <div>
                           <p className="text-sm font-medium text-gray-600">
                             Selected Clip
                           </p>
-                          <p className="text-xl font-bold text-gray-900">
+                          <p className="text-lg font-bold text-gray-900 sm:text-xl">
                             {startTime} <span className="text-gray-400">→</span> {endTime}
                           </p>
                         </div>
@@ -418,13 +422,13 @@ export default function Home() {
 
                       <button
                         onClick={handleGenerateLink}
-                        className="w-full rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 py-4 text-base font-bold text-white shadow-lg transition hover:scale-[1.01] hover:shadow-xl"
+                        className="w-full rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 py-4 text-base font-bold text-white shadow-lg transition hover:scale-[1.01] hover:shadow-xl active:scale-[0.99]"
                       >
                         Generate Shareable Link
                       </button>
                     </div>
 
-                    <div className="rounded-2xl border border-green-200 bg-gradient-to-r from-green-50 to-white p-5 shadow-sm">
+                    <div className="rounded-2xl border border-green-200 bg-gradient-to-r from-green-50 to-white p-4 shadow-sm sm:p-5">
                       <div className="mb-3 flex items-center justify-between">
                         <p className="text-sm font-bold text-green-800">
                           Generated Link
@@ -440,91 +444,89 @@ export default function Home() {
                         type="text"
                         readOnly
                         value={generatedLink}
-                        className="w-full rounded-xl border border-green-200 bg-white p-3 text-sm text-black shadow-inner"
+                        className="w-full rounded-xl border border-green-200 bg-white p-3 text-sm text-black shadow-inner break-all"
                       />
 
                       <div className="mt-4 flex flex-wrap gap-3">
                         <button
                           onClick={handleCopyLink}
-                          className="rounded-xl bg-green-600 px-4 py-3 text-sm font-semibold text-white shadow transition hover:bg-green-700"
+                          className="flex-1 rounded-xl bg-green-600 px-4 py-3 text-sm font-semibold text-white shadow transition hover:bg-green-700 active:scale-[0.99] sm:flex-none"
                         >
                           Copy Link
                         </button>
 
                         <button
                           onClick={handleNativeShare}
-                          className="rounded-xl bg-gray-900 px-4 py-3 text-sm font-semibold text-white shadow transition hover:bg-black"
+                          className="flex-1 rounded-xl bg-gray-900 px-4 py-3 text-sm font-semibold text-white shadow transition hover:bg-black active:scale-[0.99] sm:flex-none"
                         >
                           Share
                         </button>
                       </div>
 
                       {generatedLink && (
-                        <>
-                          <div className="mt-6 border-t border-green-100 pt-5">
-                            <p className="mb-3 text-sm font-semibold text-gray-700">
-                              Share directly
-                            </p>
+                        <div className="mt-6 border-t border-green-100 pt-5">
+                          <p className="mb-3 text-sm font-semibold text-gray-700">
+                            Share directly
+                          </p>
 
-                            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-                              <button
-                                onClick={shareToX}
-                                className="rounded-xl bg-black px-4 py-3 text-sm font-semibold text-white transition hover:opacity-90"
-                              >
-                                X
-                              </button>
+                          <div className="grid grid-cols-3 gap-2 sm:gap-3 md:grid-cols-6">
+                            <button
+                              onClick={shareToX}
+                              className="rounded-xl bg-black px-3 py-3 text-xs font-semibold text-white transition hover:opacity-90 active:scale-[0.97] sm:text-sm"
+                            >
+                              X
+                            </button>
 
-                              <button
-                                onClick={shareToFacebook}
-                                className="rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
-                              >
-                                Facebook
-                              </button>
+                            <button
+                              onClick={shareToFacebook}
+                              className="rounded-xl bg-blue-600 px-3 py-3 text-xs font-semibold text-white transition hover:bg-blue-700 active:scale-[0.97] sm:text-sm"
+                            >
+                              Facebook
+                            </button>
 
-                              <button
-                                onClick={shareToWhatsApp}
-                                className="rounded-xl bg-green-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-green-600"
-                              >
-                                WhatsApp
-                              </button>
+                            <button
+                              onClick={shareToWhatsApp}
+                              className="rounded-xl bg-green-500 px-3 py-3 text-xs font-semibold text-white transition hover:bg-green-600 active:scale-[0.97] sm:text-sm"
+                            >
+                              WhatsApp
+                            </button>
 
-                              <button
-                                onClick={shareToTelegram}
-                                className="rounded-xl bg-sky-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-sky-600"
-                              >
-                                Telegram
-                              </button>
+                            <button
+                              onClick={shareToTelegram}
+                              className="rounded-xl bg-sky-500 px-3 py-3 text-xs font-semibold text-white transition hover:bg-sky-600 active:scale-[0.97] sm:text-sm"
+                            >
+                              Telegram
+                            </button>
 
-                              <button
-                                onClick={shareToLinkedIn}
-                                className="rounded-xl bg-blue-800 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-900"
-                              >
-                                LinkedIn
-                              </button>
+                            <button
+                              onClick={shareToLinkedIn}
+                              className="rounded-xl bg-blue-800 px-3 py-3 text-xs font-semibold text-white transition hover:bg-blue-900 active:scale-[0.97] sm:text-sm"
+                            >
+                              LinkedIn
+                            </button>
 
-                              <button
-                                onClick={shareByEmail}
-                                className="rounded-xl bg-gray-700 px-4 py-3 text-sm font-semibold text-white transition hover:bg-gray-800"
-                              >
-                                Email
-                              </button>
-                            </div>
-
-                            <p className="mt-4 text-xs text-gray-500">
-                              Instagram does not support direct web link sharing like the others.
-                              For Instagram, use <span className="font-semibold">Copy Link</span> or the device's native <span className="font-semibold">Share</span> option.
-                            </p>
+                            <button
+                              onClick={shareByEmail}
+                              className="rounded-xl bg-gray-700 px-3 py-3 text-xs font-semibold text-white transition hover:bg-gray-800 active:scale-[0.97] sm:text-sm"
+                            >
+                              Email
+                            </button>
                           </div>
-                        </>
+
+                          <p className="mt-4 text-xs text-gray-500">
+                            Instagram does not support direct web link sharing like the others.
+                            For Instagram, use <span className="font-semibold">Copy Link</span> or the device&apos;s native <span className="font-semibold">Share</span> option.
+                          </p>
+                        </div>
                       )}
                     </div>
                   </div>
                 ) : (
-                  <div className="rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 text-center shadow-sm">
-                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-600 text-2xl text-white shadow-lg">
+                  <div className="rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-5 text-center shadow-sm sm:p-6">
+                    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-2xl text-white shadow-lg sm:h-16 sm:w-16">
                       ▶
                     </div>
-                    <p className="text-lg font-semibold text-blue-900">
+                    <p className="text-base font-semibold text-blue-900 sm:text-lg">
                       Viewing clip from <strong>{startTime}</strong> to{" "}
                       <strong>{endTime}</strong>
                     </p>
@@ -535,7 +537,7 @@ export default function Home() {
                       onClick={() => {
                         window.location.href = "/";
                       }}
-                      className="mt-5 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white shadow transition hover:bg-blue-700"
+                      className="mt-5 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white shadow transition hover:bg-blue-700 active:scale-[0.99]"
                     >
                       Create Your Own Clip
                     </button>
